@@ -57,10 +57,10 @@ When prompted, enter:
 
 * AWS Access Key
 * AWS Secret Access Key
-* Region `<region>`
+* Region `$REGION`
 * Output format
 
-### Get your AWS account ID `AWS_ACCOUNT_ID`
+### Get your AWS account ID `$AWS_ACCOUNT_ID`
 Unix-based:
 ```
 export AWS_ACCOUNT_ID = aws sts get-caller-identity --query "Account" --output text
