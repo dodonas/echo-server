@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: echo-server-config
+data:
+  # This is the index.html file that should be mounted as a part of the deployment
+  index.html: |
+    {{ .Files.Get "../app/index.html" | indent 4 }}

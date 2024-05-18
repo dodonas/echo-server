@@ -1,0 +1,46 @@
+# This is the values.yaml file. It provides default values for the Helm chart.
+# If needed, you can override these values by setting them in the values-prod.yaml or values-dev.yaml files.
+# Use -f values-prod.yaml or -f values-dev.yaml when running helm install or helm upgrade to apply the values in those files.
+
+# The number of replicas to create
+replicaCount: 1
+
+# The Docker image to use
+image:
+  # The repository where the image is located
+  # I'm using my AWS Account ID here, but I'm not worried about sharing it because it's public anyway, and it will expire in 5 days
+  repository: 329082085800.dkr.ecr.us-west-2.amazonaws.com/echo-server
+  # The policy for pulling the image
+  # IfNotPresent means that the image will only be pulled if it's not already present
+  pullPolicy: IfNotPresent
+  # The tag of the image to use
+  # For sake of simplicity, I'm using the latest tag, but usually, you should use a specific tag
+  tag: "latest"
+
+# The configuration for the service
+service:
+  # The type of service to create
+  # LoadBalancer means that the service will be exposed using a load balancer
+  # There are other types of services, such as ClusterIP and NodePort
+  #  ClusterIP: Exposes the service on a cluster-internal IP. Choosing this value makes the service only reachable from within the cluster.
+  #  NodePort: Exposes the service on each Node’s IP at a static port.
+  type: LoadBalancer
+  # The port that the service should expose
+  port: 80
+
+# Environment variables to set in the pods
+env:
+  # The environment in which the application is running
+  environment: "production"
+
+# The resources to allocate to the pods
+resources: {}
+
+# The node selector to use for pod scheduling
+nodeSelector: {}
+
+# The tolerations to use for pod scheduling
+tolerations: []
+
+# The affinity to use for pod scheduling
+affinity: {}

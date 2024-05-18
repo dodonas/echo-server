@@ -1,0 +1,6 @@
+# This is the Chart.yaml file. It contains metadata about the chart, such as its name, version, and description.
+#  This file is required for all Helm charts.
+apiVersion: v2
+name: echo-server
+description: A Helm chart for Kubernetes
+version: 1.0.0

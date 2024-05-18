@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "echo-server.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "echo-server.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "echo-server.fullname" . }}
+    spec:
+      containers:
+        - name: echo-server
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: 5000
+          env:
+            - name: ENVIRONMENT
+              value: "{{ .Values.env.environment }}"
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/index.html
+              subPath: index.html
+      imagePullSecrets:
+        - name: regcred
+      volumes:
+        - name: config-volume
+          configMap:
+            name: echo-server-config
